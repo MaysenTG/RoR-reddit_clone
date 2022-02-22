@@ -1,0 +1,42 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#"><img src="https://logos-world.net/wp-content/uploads/2020/10/Reddit-Logo.png" class="img" height="50"/></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+        <form class="d-flex" style="width: 50vw">
+          <input class="form-control me-2" type="search" placeholder="Search Shreddit" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </ul>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <div class="d-grid gap-2 d-md-block">
+            <% if !account_signed_in? %>
+              <%= link_to "Log in", new_account_session_url, class: "btn btn-outline-primary" %>
+              <%= link_to "Sign up", new_account_registration_url, class: "btn btn-primary" %>
+            <% end %>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <% if account_signed_in? %><%= current_account.user_name %><% else %>Account<% end %>
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li>
+              <h6 class="dropdown-header">View options</h6>
+            </li>
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li>
+              <h6 class="dropdown-header">More stuff</h6>
+            </li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><%= button_to "Log out", destroy_account_session_path, method: :delete, class: "dropdown-item" %></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

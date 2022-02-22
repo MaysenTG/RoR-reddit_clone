@@ -1,0 +1,103 @@
+<div class="container">
+  <h2>Sign up</h2>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), data: { turbo: false }) do |f| %>
+    <%= resource.errors %>
+    <div class="row">
+      <div class="col">
+        <div class="mb-3">
+          <% invalid = @account.errors.include?(:first_name) %>
+          <%= f.label :first_name %><br />
+          <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name", class: "form-control #{'is-invalid' if invalid}" %>
+          <% if invalid %>
+            <span class="d-flex">
+              <div class="invalid-feedback d-block">
+                <% @account.errors.full_messages_for(:first_name).each do |error_message| %>
+                  <%= error_message %>.
+                <% end %>
+              </div>
+            </span>
+          <% end %>
+        </div>
+      </div>
+      <div class="col">
+        <div class="mb-3">
+          <% invalid = @account.errors.include?(:last_name) %>
+          <%= f.label :last_name %><br />
+          <%= f.text_field :last_name, autocomplete: "last_name", class: "form-control #{'is-invalid' if invalid}" %>
+          <% if invalid %>
+            <span class="d-flex">
+              <div class="invalid-feedback d-block">
+                <% @account.errors.full_messages_for(:last_name).each do |error_message| %>
+                  <%= error_message %>.
+                <% end %>
+              </div>
+            </span>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="input-group mb-3">
+      <% invalid = @account.errors.include?(:user_name) %>
+      <span class="input-group-text" id="basic-addon1">r/</span>
+      <%= f.text_field :user_name, placeholder: "Username", class: "form-control #{'is-invalid' if invalid}" %>
+      <% if invalid %>
+        <span class="d-flex">
+          <div class="invalid-feedback d-block">
+            <% @account.errors.full_messages_for(:user_name).each do |error_message| %>
+              <%= error_message %>.
+            <% end %>
+          </div>
+        </span>
+      <% end %>
+    </div>
+    <div class="mb-3">
+      <% invalid = @account.errors.include?(:email) %>
+      <%= f.label :email %><br />
+      <%= f.email_field :email, autocomplete: "email", class: "form-control #{'is-invalid' if invalid}" %>
+      <% if invalid %>
+        <span class="d-flex">
+          <div class="invalid-feedback d-block">
+            <% @account.errors.full_messages_for(:email).each do |error_message| %>
+              <%= error_message %>.
+            <% end %>
+          </div>
+        </span>
+      <% end %>
+    </div>
+    <div class="mb-3">
+      <% invalid = @account.errors.include?(:password) %>
+      <%= f.label :password %>
+      <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> characters minimum)</em>
+      <% end %><br />
+      <%= f.password_field :password, autocomplete: "new-password", class: "form-control #{'is-invalid' if invalid}" %>
+      <% if invalid %>
+        <span class="d-flex">
+          <div class="invalid-feedback d-block">
+            <% @account.errors.full_messages_for(:password).each do |error_message| %>
+              <%= error_message %>.
+            <% end %>
+          </div>
+        </span>
+      <% end %>
+    </div>
+    <div class="mb-3">
+      <% invalid = @account.errors.include?(:password_confirmation) %>
+      <%= f.label :password_confirmation %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control #{'is-invalid' if invalid}" %>
+      <% if invalid %>
+        <span class="d-flex">
+          <div class="invalid-feedback d-block">
+            <% @account.errors.full_messages_for(:password_confirmation).each do |error_message| %>
+              <%= error_message %>.
+            <% end %>
+          </div>
+        </span>
+      <% end %>
+    </div>
+    <div class="actions">
+      <%= f.submit "Sign up" %>
+    </div>
+  <% end %>
+</div>
+<%= render "devise/shared/links" %>

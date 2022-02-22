@@ -1,0 +1,42 @@
+<div class="container fluid" style="margin-top: 3rem; max-width: 65rem;">
+  Trending today
+  <div class="row row-cols-1 row-cols-md-4 g-4">
+    <% 4.times do %>
+      <div class="col">
+        <div class="card" style="background:linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,1)), url(https://external-preview.redd.it/OaOe3761Z0kiFBjTqcm1e5M_97ESH_SRXqGL-IkO8k8.jpg?auto=webp&s=6580030163e40b28e79165f07b0795a50966e392) center center / cover no-repeat rgb(255, 255, 255);">
+          <div class="card-body">
+            <h5 class="card-title text-light">Card title</h5>
+            <p class="card-text text-light">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <br/>
+  Popular posts
+  <div class="row">
+    <div class="col-8">
+      <% 5.times do %>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            <div class="card-footer bg-transparent">
+              <button class="btn btn-outline-secondary"><i class="bi bi-chat-left"></i> 3.4k comments</button> &nbsp;
+              <button class="btn btn-outline-secondary"><i class="bi bi-arrow-90deg-left"></i> Share</button> &nbsp;
+              <button class="btn btn-outline-secondary"><i class="bi bi-box-arrow-down"></i> Save</button> &nbsp;
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="col" style="width: 25%">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Communities near you</h5>
+          <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
