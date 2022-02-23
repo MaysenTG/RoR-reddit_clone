@@ -22,6 +22,15 @@
             </div>
           </div>
         </div>
+        <br/>
+        <div class="container">
+          <%= render partial: 'comments/form' %>
+        </div>
+        <% if @post.comments.size > 0 %>
+          <div class="container">
+            <%= render partial: 'comments/comments' %>
+          <% end %>
+        </div>
       </div>
       <div class="col g-5">
         <div class="card">

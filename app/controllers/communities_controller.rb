@@ -7,7 +7,7 @@ class CommunitiesController < ApplicationController
   end
 
   def show
-    @posts = @community.posts
+    @posts = @community.posts.order(created_at: :desc)
   end
 
   def create
@@ -27,7 +27,6 @@ class CommunitiesController < ApplicationController
   
   def edit
   end
-  
   
   def update
     respond_to do |format|
