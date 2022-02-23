@@ -16,11 +16,17 @@
   Popular posts
   <div class="row">
     <div class="col-8">
-      <% 5.times do %>
+      <% @posts.each do |post| %>
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            <span class="d-flex">
+              <h6><%= link_to "/r#{post.community.name}", community_path(post.community) %> . <small>Posted by u/<%= Account.find(post.account_id).user_name %></small></h6>
+              <% if post.account_id == current_account.id %>&nbsp; <%= button_to "X", community_post_path(post.community_id, post.id), method: :delete %><% end %>
+            </span>
+            <%= link_to community_post_path(post.community_id, post.id) do %>
+              <h5 class="card-title"><%= post.title %></h5>
+              <p class="card-text"><%= post.body %></p>
+            <% end %>
             <div class="card-footer bg-transparent">
               <button class="btn btn-outline-secondary"><i class="bi bi-chat-left"></i> 3.4k comments</button> &nbsp;
               <button class="btn btn-outline-secondary"><i class="bi bi-arrow-90deg-left"></i> Share</button> &nbsp;
@@ -30,13 +36,17 @@
         </div>
       <% end %>
     </div>
-    <div class="col" style="width: 25%">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Communities near you</h5>
-          <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
+    <div class="col">
+      <% comm_counter = 1 %>
+      <% @communities.each do |community| %>
+        <div class="card">
+          <div class="card-body">
+            <small></small>
+            <h5 class="card-title"><%= comm_counter%>. <%= link_to "r/#{community.name}", community_path(community) %></h5>
+          </div>
         </div>
-      </div>
+        <% comm_counter = comm_counter + 1 %>
+      <% end %>
     </div>
   </div>
 </div>

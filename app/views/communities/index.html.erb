@@ -1,0 +1,11 @@
+<h1>Communities#index</h1>
+<p>Find me in app/views/communities/index.html.erb</p>
+<div class="container">
+  <% @communities.each do |c| %>
+    <h2><%= link_to c.name, c %></h2>
+    <%= simple_format c.rules %>
+  <% end %>
+</div>
+
+
+<%= link_to "Create community", new_community_path, class: "btn btn-primary" %>

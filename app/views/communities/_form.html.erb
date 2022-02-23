@@ -1,0 +1,27 @@
+<div class="container">
+  <%= form_for @community do |form| %>
+    <div class="mb-3">
+      <%= label_tag :name %>
+      <%= form.text_field :name, class: "form-control" %>
+    </div>
+    <div class="mb-3">
+      <%= label_tag :url %>
+      <%= form.text_field :url, class: "form-control" %>
+    </div>
+    <div class="mb-3">
+      <%= label_tag :slogan %>
+      <%= form.text_area :slogan, class: "form-control" %>
+    </div>
+    <div class="mb-3">
+      <%= label_tag :description %>
+      <%= form.text_area :description, class: "form-control" %>
+    </div>
+    <div class="mb-3">
+      <%= label_tag :rules %>
+      <%= form.text_area :rules, class: "form-control" %>
+    </div>
+    <div class="mb-3">
+      <%= form.submit %>
+    </div>
+  <% end %>
+</div>

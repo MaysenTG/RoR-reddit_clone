@@ -1,0 +1,15 @@
+<div class="container">
+  <%= form_for [@community, @post] do |form| %>
+    <div class="mb-3">
+      <%= label_tag :title %>
+      <%= form.text_field :title, class: "form-control" %>
+    </div>
+    <div class="mb-3">
+      <%= label_tag :body %>
+      <%= form.text_area :body, class: "form-control" %>
+    </div>
+    <div class="mb-3">
+      <%= form.submit %>
+    </div>
+  <% end %>
+</div>

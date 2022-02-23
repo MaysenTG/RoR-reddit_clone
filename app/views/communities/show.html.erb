@@ -1,0 +1,23 @@
+<div id="blue-box" style="height: 50px; background-color: #33a8ff;"></div>
+<div id="white-box" style="height: 50px; background-color: white;">
+  <h2 class="text-center">Here - <%= @community.slogan %></h2>
+</div>
+
+
+<div class="container">
+    <div class="row">
+    <div class="col-9"></div>
+    <div class="col-3">
+
+    </div>
+</div>
+
+
+
+<% if @posts.size > 0 %>
+  <% @posts.each do |post| %>
+    <%= link_to post.title, community_post_path(@community, post) %>
+    <%= truncate post.body, length: 150 %>
+  <% end %>
+<% end %>
+<%= link_to "Create new post", new_community_post_path(@community), class: "btn btn-primary float-right" %>
