@@ -10,12 +10,13 @@ class PostsController < ApplicationController
     end
   
     def create
+      @community = Community.find(params[:community_id])
       @post = Post.new post_values
       @post.account_id = current_account.id 
       @post.community_id = params[:community_id]
       
       if @post.save
-        redirect_to community_post_path(@post.community_id, @post.id)
+        redirect_to community_path(@post.community_id)
       else
         @community = Community.find(params[:community_id])
         render :new
@@ -32,6 +33,13 @@ class PostsController < ApplicationController
       @post.destroy
       redirect_to community_path(@post.community_id)
     end
+    
+    def find
+      @community = Community.find(params[:community_id])
+      @post = Post.new
+    end
+    
+    
     
     private 
     

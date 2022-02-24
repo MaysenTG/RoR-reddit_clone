@@ -12,6 +12,7 @@
       </div>
     <% end %>
   </div>
+  
   <br/>
   Popular posts
   <div class="row">
@@ -22,12 +23,12 @@
             <span class="d-flex">
               <h6><%= link_to "/r#{post.community.name}", community_path(post.community) %> . <small>Posted by u/<%= Account.find(post.account_id).user_name %></small></h6>
             </span>
-            <%= link_to community_post_path(post.community_id, post.id) do %>
+            <%= link_to community_post_path(post.community_id, post.id), style: "text-decoration: none; color: black;" do %>
               <h5 class="card-title"><%= post.title %></h5>
               <p class="card-text"><%= post.body %></p>
             <% end %>
             <div class="card-footer bg-transparent">
-              <button class="btn btn-outline-secondary"><i class="bi bi-chat-left"></i> <%= post.comments.size %> comments</button> &nbsp;
+              <%= link_to community_post_path(post.community_id, post.id), style: "text-decoration: none; color: black;" do %><button class="btn btn-outline-secondary"><i class="bi bi-chat-left"></i><%= post.comments.size %> comments</button><% end %> &nbsp;
               <button class="btn btn-outline-secondary"><i class="bi bi-arrow-90deg-left"></i> Share</button> &nbsp;
               <button class="btn btn-outline-secondary"><i class="bi bi-box-arrow-down"></i> Save</button> &nbsp;
               <!-- Example single danger button -->
@@ -37,7 +38,7 @@
                 </button>
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item" href="#">Edit post</a></li>
-                  <% if post.account_id == current_account.id %>&nbsp; <li><%= button_to "Delete post", community_post_path(post.community_id, post.id), method: :delete, data: { confirm: "Are you sure?"}, class: "btn btn-danger dropdown-item" %></li><% end %>
+                  <% if post.account_id == current_account.id %>&nbsp; <li><%= button_to "Delete post", community_post_path(post.community_id, post.id), method: :delete, confirm: "Are you sure?", class: "btn btn-danger dropdown-item" %></li><% end %>
                 </ul>
               </div>
             </div>

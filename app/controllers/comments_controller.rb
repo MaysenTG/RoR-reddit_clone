@@ -10,7 +10,7 @@ class CommentsController < ApplicationController
         @comment.account_id = current_account.id
         
         if @comment.save
-            redirect_to community_path(@post.community_id)
+            redirect_to community_post_path(@post.community_id, @post.id)
         else
             @community = Community.find(params[:community_id])
             render :new

@@ -1,12 +1,19 @@
 <div class="container">
   <%= form_for @community do |form| %>
-    <div class="mb-3">
-      <%= label_tag :name %>
-      <%= form.text_field :name, class: "form-control" %>
-    </div>
-    <div class="mb-3">
-      <%= label_tag :url %>
-      <%= form.text_field :url, class: "form-control" %>
+    <div class="row">
+      <div class="col">
+        <div class="mb-3">
+          <%= label_tag :name %>
+          <%= form.text_field :name, class: "form-control", oninput: "guessURL();" %>
+        </div>
+      </div>
+      <div class="col">
+        <%= label_tag :url %>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">r/</span>
+          <%= form.text_field :url, class: "form-control", id: "community-url" %>
+        </div>
+      </div>
     </div>
     <div class="mb-3">
       <%= label_tag :slogan %>
@@ -25,3 +32,10 @@
     </div>
   <% end %>
 </div>
+<script>
+  $(document).ready(function() {
+    function guessURL() {
+      console.log("woo")
+    }
+  });
+</script>
