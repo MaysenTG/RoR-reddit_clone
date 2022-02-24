@@ -4,7 +4,7 @@
       <div class="col">
         <div class="mb-3">
           <%= label_tag :name %>
-          <%= form.text_field :name, class: "form-control", oninput: "guessURL();" %>
+          <%= form.text_field :name, class: "form-control", id: "name-input" %>
         </div>
       </div>
       <div class="col">
@@ -33,9 +33,11 @@
   <% end %>
 </div>
 <script>
-  $(document).ready(function() {
-    function guessURL() {
-      console.log("woo")
-    }
+  document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("name-input").addEventListener("input", function() {
+      var name = document.getElementById("name-input").value;
+      var url = name.toLowerCase().replace(/ /g, "-");
+      document.getElementById("community-url").value = url;
+    });
   });
 </script>
