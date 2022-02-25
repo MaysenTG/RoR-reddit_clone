@@ -1,0 +1,15 @@
+<div class="container">
+  <%= form_with model: [@community, Post.find(params[:id])] do |form| %>
+    <div class="mb-3">
+      <%= label_tag :title %>
+      <%= form.text_field :title, class: "form-control" %>
+    </div>
+    <div class="mb-3">
+      <%= label_tag :body %>
+      <%= form.text_area :body, class: "form-control" %>
+    </div>
+    <div class="mb-3">
+      <button type="submit" class="btn btn-primary" style="width: 100%;">Save changes</button>
+    </div>
+  <% end %>
+</div>

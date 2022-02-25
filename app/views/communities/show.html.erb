@@ -1,7 +1,7 @@
 <div id="blue-box" style="height: 50px; background-color: #33a8ff;"></div>
 <div id="white-box" style="height: 100%; background-color: white;">
   <div style="width: 40%; margin: 0 auto;">
-    <h2 class="float-left">Here - <%= @community.slogan %></h2>
+    <h2 class="float-left">Here - <%= @community.slogan %> - <% if @community.account_id == current_account.id %><%= link_to "Edit", edit_community_path(@community.id) %><% end %></h2>
     <h5>r/<%= @community.name %></h5>
   </div>
 </div>
@@ -31,9 +31,9 @@
                   Actions
                 </button>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Edit post</a></li>
                   <% if post.account_id == current_account.id %>&nbsp; 
                     <li><%= button_to "Delete post", community_post_path(post.community_id, post.id), method: :delete, confirm: "Are you sure?", class: "btn btn-danger dropdown-item" %></li>
+                    <li><%= link_to "Edit post", edit_community_post_path(post.community_id, post.id), class: "dropdown-item" %></li>
                   <% end %>
                 </ul>
               </div>

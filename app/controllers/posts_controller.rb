@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-    before_action :authenticate_account!, except: [:index, :show]
+    before_action :authenticate_account!, except: [:index, :show, :new, :edit]
     before_action :set_post, only: [:show]
     
     def index
@@ -7,6 +7,8 @@ class PostsController < ApplicationController
     end
   
     def show
+      @community = Community.find(params[:community_id])
+      @post = Post.find(params[:id])
     end
   
     def create
@@ -34,10 +36,24 @@ class PostsController < ApplicationController
       redirect_to community_path(@post.community_id)
     end
     
-    def find
+    
+    def edit
       @community = Community.find(params[:community_id])
-      @post = Post.new
+      @post = Post.find(params[:id])
     end
+  
+    
+    def update
+      @post = Post.find(params[:id])
+      respond_to do |format|
+        if @post.update(post_values)
+          format.html { redirect_to community_path(@post.community_id) }
+        else
+          format.html { render :edit }
+        end
+      end
+    end
+    
     
     
     

@@ -3,6 +3,8 @@ Rails.application.routes.draw do
     resources :posts
   end
   
+  get 'communities/:id/edit' => 'communities#update'
+  
   resources :posts do
     resources :comments
   end

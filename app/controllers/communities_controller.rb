@@ -26,9 +26,12 @@ class CommunitiesController < ApplicationController
   end
   
   def edit
+    @community = Community.find(params[:id])
   end
+
   
   def update
+    @community = Community.find(params[:id])
     respond_to do |format|
       if @community.update(community_values)
         format.html { redirect_to community_path(@community) }
