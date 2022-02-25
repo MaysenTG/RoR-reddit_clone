@@ -9,6 +9,6 @@
     <%= form.text_area :body, class: "form-control" %>
   </div>
   <div class="mb-3">
-    <button type="submit" class="btn btn-primary" style="width: 100%;">Create post</button>
+    <button type="submit" class="btn btn-primary" style="width: 100%;"><% if @community.posts.size == 0 %>Create your first post<% else %>Create post<% end %></button>
   </div>
 <% end %>

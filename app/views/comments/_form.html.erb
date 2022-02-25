@@ -1,6 +1,6 @@
 <%= form_with model: [@post, @post.comments.build] do |form| %>
   <div class="mb-3">
-    <%= form.label "Leave a comment as: #{Account.find(current_account.id).user_name}" %>
+    <%= form.label "Leave a comment as: #{current_account ? Account.find(current_account.id).user_name : ""}" %>
     <%= form.text_area :body, class: "form-control" %>
   </div>
   <div class="mb-3">

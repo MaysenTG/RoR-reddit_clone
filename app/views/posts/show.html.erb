@@ -7,38 +7,56 @@
       </span>
     </div>
   </nav>
-  <div>
-    <div class="row row-cols-sm-1 row-cols-lg-2">
-      <div class="col-12 col-lg-9 p-2">
-        <div class="container">
-          <div class="card">
-            <div class="card-body">
-              <h6>r/<%= @post.community.name %> . <small>Posted by u/<%= Account.find(@post.account_id).user_name %></small></h6>
-              <h5 class="card-title"><%= @post.title %></h5>
-              <p class="card-text"><%= @post.body %></p>
+  <br/>
+  <div class="row row-cols-sm-1 row-cols-md-2 row-cols-lg-2">
+    <div class="col-12 col-lg-9 p-2">
+      <div class="card">
+        <div class="card-body">
+          <span class="d-flex">
+            <h6><%= link_to "/r#{@post.community.name}", community_path(@post.community) %> . <small>Posted by u/<%= Account.find(@post.account_id).user_name %></small></h6>
+          </span>
+          <%= link_to community_post_path(@post.community_id, @post.id), style: "text-decoration: none; color: black;" do %>
+            <h5 class="card-title"><%= @post.title %></h5>
+            <p class="card-text"><%= @post.body %></p>
+          <% end %>
+          <div class="card-footer bg-transparent">
+            <%= link_to community_post_path(@post.community_id, @post.id), style: "text-decoration: none; color: black;" do %><button class="btn btn-outline-secondary"><i class="bi bi-chat-left"></i><%= @post.comments.size %> comments</button><% end %> &nbsp;
+            <button class="btn btn-outline-secondary"><i class="bi bi-arrow-90deg-left"></i> Share</button> &nbsp;
+            <button class="btn btn-outline-secondary"><i class="bi bi-box-arrow-down"></i> Save</button> &nbsp;
+            <!-- Example single danger button -->
+            <div class="btn-group">
+              <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                Actions
+              </button>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Edit post</a></li>
+                <% if current_account and @post.account_id == current_account.id %>&nbsp; 
+                  <li><%= button_to "Delete post", community_post_path(@post.community_id, @post.id), method: :delete, confirm: "Are you sure?", class: "btn btn-danger dropdown-item" %></li>
+                <% end %>
+              </ul>
             </div>
           </div>
         </div>
-        <br/>
-        <div class="container">
-          <%= render partial: 'comments/form' %>
-        </div>
-        <% if @post.comments.size > 0 %>
-          <div class="container">
-            <%= render partial: 'comments/comments' %>
-          <% end %>
-        </div>
       </div>
-      <div class="col col-lg-3 p-2">
-        <div class="card">
-          <div class="card-body">
-            <%= link_to community_path(@post.community_id) do %>
-              <h5 class="card-title">r/<%= @post.community.name %></h5>
-              <h6 class="card-text"><%= @post.community.slogan %></h6>
-            <% end %>
-          </div>
+      <br/>
+      <br/>
+      <% if current_account %>
+        <%= render partial: 'comments/form' %>
+      <% end %>
+      <% if @post.comments.size > 0 %>
+        <%= render partial: 'comments/comments' %>
+      <% end %>
+    </div>
+    <div class="col-12 col-lg-3 p-2">
+      <div class="card">
+        <div class="card-body">
+          <%= link_to community_path(@post.community_id) do %>
+            <h5 class="card-title">r/<%= @post.community.name %></h5>
+            <h6 class="card-text"><%= @post.community.slogan %></h6>
+          <% end %>
         </div>
       </div>
     </div>
   </div>
 </div>
+<!-- End of main container -->

@@ -5,8 +5,8 @@
       <div class="col">
         <div class="card" style="background:linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,1)), url(https://external-preview.redd.it/OaOe3761Z0kiFBjTqcm1e5M_97ESH_SRXqGL-IkO8k8.jpg?auto=webp&s=6580030163e40b28e79165f07b0795a50966e392) center center / cover no-repeat rgb(255, 255, 255);">
           <div class="card-body">
-            <h5 class="card-title text-light">Card title</h5>
-            <p class="card-text text-light">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
+            <h5 class="card-title text-light"> </h5>
+            <p class="card-text small text-light">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
           </div>
         </div>
       </div>
@@ -16,7 +16,7 @@
   <br/>
   Popular posts
   <div class="row">
-    <div class="col-8">
+    <div class="col-12 col-lg-8">
       <% @posts.each do |post| %>
         <div class="card">
           <div class="card-body">
@@ -38,7 +38,7 @@
                 </button>
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item" href="#">Edit post</a></li>
-                  <% if post.account_id == current_account.id %>&nbsp; <li><%= button_to "Delete post", community_post_path(post.community_id, post.id), method: :delete, confirm: "Are you sure?", class: "btn btn-danger dropdown-item" %></li><% end %>
+                  <% if current_account and post.account_id == current_account.id %>&nbsp; <li><%= button_to "Delete post", community_post_path(post.community_id, post.id), method: :delete, confirm: "Are you sure?", class: "btn btn-danger dropdown-item" %></li><% end %>
                 </ul>
               </div>
             </div>
@@ -48,6 +48,7 @@
       <% end %>
     </div>
     <div class="col">
+    <h4>Top communities</h4>
       <% comm_counter = 1 %>
       <% @communities.each do |community| %>
         <div class="card">

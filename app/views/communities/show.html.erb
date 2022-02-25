@@ -1,7 +1,7 @@
 <div id="blue-box" style="height: 50px; background-color: #33a8ff;"></div>
 <div id="white-box" style="height: 100%; background-color: white;">
   <div style="width: 40%; margin: 0 auto;">
-    <h2 class="float-left">Here - <%= @community.slogan %> - <% if @community.account_id == current_account.id %><%= link_to "Edit", edit_community_path(@community.id) %><% end %></h2>
+    <h2 class="float-left">Here - <%= @community.slogan %> <% if current_account and @community.account_id == current_account.id %><%= link_to "- Edit", edit_community_path(@community.id) %><% end %></h2>
     <h5>r/<%= @community.name %></h5>
   </div>
 </div>
@@ -10,7 +10,7 @@
 <div class="container">
   <div class="row row-cols-sm-1 row-cols-lg-2">
     <div class="col-12 col-lg-9">
-      <%= render 'posts/form' %>
+      <% if current_account %><%= render 'posts/form' %><% end %>
       <% @posts.each do |post| %>
         <div class="card">
           <div class="card-body">
@@ -31,7 +31,7 @@
                   Actions
                 </button>
                 <ul class="dropdown-menu">
-                  <% if post.account_id == current_account.id %>&nbsp; 
+                  <% if current_account and post.account_id == current_account.id %>&nbsp; 
                     <li><%= button_to "Delete post", community_post_path(post.community_id, post.id), method: :delete, confirm: "Are you sure?", class: "btn btn-danger dropdown-item" %></li>
                     <li><%= link_to "Edit post", edit_community_post_path(post.community_id, post.id), class: "dropdown-item" %></li>
                   <% end %>
