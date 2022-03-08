@@ -18,3 +18,11 @@ body {
     background-color: rgb(204, 203, 203);
     font-family: 'IBM Plex Sans', sans-serif;
 }
+
+.comment-form {
+    display: none;
+}
+
+.sub-comment {
+    padding-left: 20px;
+}

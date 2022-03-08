@@ -1,4 +1,9 @@
 <%= form_with model: [@post, @post.comments.build] do |form| %>
+
+  <% if !parent.nil? %>
+    <input type="hidden" name="comment[parent_id]" value="<%= parent.id %>" >
+  <% end %>
+  
   <div class="mb-3">
     <%= form.label "Leave a comment as: #{current_account ? Account.find(current_account.id).user_name : ""}" %>
     <%= form.text_area :body, class: "form-control" %>

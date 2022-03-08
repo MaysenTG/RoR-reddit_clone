@@ -1,18 +1,3 @@
-<!-- This partial renders the comments from the post itself -->
-<% @post.comments.order(created_at: :desc).each do |comment| %>
-  <% if comment.id? %>
-    <div class="card">
-      <div class="card-header">
-        <%= Account.find(comment.account_id).user_name %> <% if comment.account_id == @post.account_id %> <span style="color: blue;">OP</span> <% end %> . <small><%= time_ago_in_words(comment.created_at) %> ago</small>
-      </div>
-      <div class="card-body">
-        <p class="card-text"><%= comment.body %></p>
-      </div>
-      
-      <div class="card-footer">
-        <%= button_to "Delete comment", post_comment_path(@post.id, comment), method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure you want to delete your comment?"} %>
-      </div>
-    </div>
-  <% end %>
-  <br/>
-<% end %>
+
+<%= render @post.comments.where(parent_id: nil).order(id: :desc) %>
+<br/>

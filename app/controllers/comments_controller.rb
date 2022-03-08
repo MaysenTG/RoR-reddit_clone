@@ -9,8 +9,13 @@ class CommentsController < ApplicationController
         @comment = @post.comments.new comment_values
         @comment.account_id = current_account.id
         
+        if @comment.parent_id.nil?
+          @post.total_comments += 1
+          @post.save
+        end
+        
         if @comment.save
-            redirect_to community_post_path(@post.community_id, @post.id)
+            redirect_to post_comment_path(@post.id, @comment.id)
         else
             @community = Community.find(params[:community_id])
             render :new
@@ -20,8 +25,12 @@ class CommentsController < ApplicationController
     def destroy
       @post = Post.find(params[:post_id])
       @comment = @post.comments.find(params[:id])
+
+      @post.total_comments -= 1
+      @post.save
+      
       @comment.destroy
-      redirect_to community_post_path(@post.community_id, @post.id)
+      redirect_to post_comment_path(@post.id, @comment.id)
     end
     
       
@@ -32,6 +41,6 @@ class CommentsController < ApplicationController
     end
     
     def comment_values
-      params.require(:comment).permit(:body)
+      params.require(:comment).permit(:body, :parent_id)
     end
 end
