@@ -1,7 +1,7 @@
 <div class="card">
   <div class="card-body">
     <span class="d-flex">
-      <h6><small>Posted by u/<%= Account.find(post.account_id).user_name %> <%= time_ago_in_words(post.created_at).gsub("about", "") %></small></h6>
+      <h6><small>Posted by u/<%= Account.find(post.account_id).user_name %> <%= time_ago_in_words(post.created_at).gsub("about", "") %> ago</small></h6>
     </span>
     <%= link_to community_post_path(post.community_id, post.id), style: "text-decoration: none; color: black;" do %>
       <h5 class="card-title"><%= post.title %></h5>

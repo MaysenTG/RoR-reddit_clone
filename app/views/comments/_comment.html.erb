@@ -2,7 +2,7 @@
 <% if comment.id? %>
   <div class="card">
     <div class="card-header">
-      <%= Account.find(comment.account_id).user_name %> <% if comment.account_id == @post.account_id %> <span style="color: blue;">OP</span> <% end %> . <small><%= time_ago_in_words(comment.created_at) %> ago</small>
+      <%= link_to Account.find(comment.account_id).user_name, account_path(comment.account_id) %> <% if comment.account_id == @post.account_id %> <span style="color: blue;">OP</span> <% end %> . <small><%= time_ago_in_words(comment.created_at) %> ago</small>
       <% if current_account and comment.account_id == current_account.id %>
         <div class="btn-group">
           <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

@@ -9,6 +9,9 @@ Rails.application.routes.draw do
     resources :comments
   end
   
+  resources :account
+
+  
   devise_for :accounts
   
   root "public#index"

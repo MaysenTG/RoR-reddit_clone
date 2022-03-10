@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-lg-9 col-md-9">
+      <h1>Hey <%= @account.user_name %></h1>
+      <br/>
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="posts-tab" data-bs-toggle="tab" data-bs-target="#posts" type="button" role="tab" aria-controls="posts" aria-selected="true">Posts</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="communities-tab" data-bs-toggle="tab" data-bs-target="#communities" type="button" role="tab" aria-controls="communities" aria-selected="false">Communities</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="comments-tab" data-bs-toggle="tab" data-bs-target="#comments" type="button" role="tab" aria-controls="comments" aria-selected="false">Comments</button>
+        </li>
+      </ul>
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
+          <% if @posts.size == 0 %>
+            <p><% if current_account.id == @account.id%>You don't have any posts.<% else %><%= @account.user_name %> has no posts.<% end %></p>
+          <% else %>
+            <% @posts.each do |post| %>
+              <%= render partial: 'posts/post_template', locals: { post: post} %>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="tab-pane fade" id="communities" role="tabpanel" aria-labelledby="communities-tab">
+          <% if @communities.size == 0 %>
+            <p><% if current_account.id == @account.id%>You are not a member of any communities.<% else %><%= @account.user_name %> is not a member of any communities.<% end %></p>
+          <% else %>
+            <% @communities.each do |community| %>
+              <%= link_to "r/#{community.name}", community_path %>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="tab-pane fade" id="comments" role="tabpanel" aria-labelledby="comments-tab">
+          <% if @communities.size == 0 %>
+            <p><% if current_account.id == @account.id%>You don't have any comments.<% else %><%= @account.user_name %> has no comments.<% end %></p>
+          <% else %>
+            <% @comments.each do |comment| %>
+              <div class="card">
+                <div class="card-body">
+                  <%= link_to community_post_path(Post.find(comment.post_id).community_id, comment.post_id) do %>
+                    <h5 class="card-title">r/<%= Post.find(comment.post_id).title %></h5>
+                    <p class="card-text"><%= comment.body %></p>
+                  <% end %>
+                </div>
+              </div>
+              <br/>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col col-lg-3 col-md-3">
+    </div>
+  </div>
+</div>
